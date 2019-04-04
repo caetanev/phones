@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use App\Country;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PhoneController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +14,10 @@ class PhoneController extends Controller
      */
     public function index()
     {
-        $customers = Customer::with('country')->get();
+        $customers = Customer::whereHas(['country' => function ($query) {
+            $query->where('code', 258);
+        }])->get();
 
         return new JsonResponse($customers);
     }
-
 }
