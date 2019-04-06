@@ -10,11 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('phones', 'PhoneController')->only([
-    'index'
-]);
+Route::get('/', 'PhoneController@index');
+Route::get('/index', 'PhoneController@index');
+Route::post('/grid', 'PhoneController@grid');
